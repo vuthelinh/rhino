@@ -1,0 +1,8 @@
+loginForm.email.field=//input[@id='Email']
+loginForm.passwd.field=//input[@id='Passwd']
+loginForm.signin.btn=//input[@id='signIn']
+
+errormsg.email=//span[@id='errormsg_0_Email']
+errormsg.passwd=//span[@id='errormsg_0_Passwd']
+
+
