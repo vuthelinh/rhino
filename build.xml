@@ -19,7 +19,7 @@
 	<property name="ws.obj"    			value="${ws.src}/object"/>
 	
 	<!-- Setting.properties -->
-	<property name="selenium.host"      value="https://admintest.wellbarrier.com"/>
+	<property name="selenium.host"      value=""/>
 	<property name="selenium.browser"   value="firefox"/>
 	<property name="selenium.timeout"   value="61"/>
 	<property name="capture.mode"       value="ON"/>
