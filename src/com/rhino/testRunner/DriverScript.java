@@ -41,7 +41,7 @@ public class DriverScript {
 
 	public static Keywords keywords = new Keywords();
 	public static String keyword_execution_result;
-	public static ArrayList<String> list_result_action=null;
+	public ArrayList<String> list_result_action=null;
 		
 	// Case
 	public static ArrayList<String> list_test_case= null;
@@ -108,17 +108,29 @@ public class DriverScript {
 											+ " - Test Case: " + list_test_case.get(j)
 											+ " - Data set #["+ counterDataSet + "]======");
 									
+									APP_LOGS.debug("=====Executing Suite: " + list_suite.get(i)
+											+ " - Test Case: " + list_test_case.get(j)
+											+ " - Data set #["+ counterDataSet + "]======");
+									
 									executeKeywords(list_test_case.get(j));
 								}else{
 									System.out.println("[info] Executing: | Running mode of data set #["+ counterDataSet + "] is NO " );
+									APP_LOGS.debug("[info] Executing: | Running mode of data set #["+ counterDataSet + "] is NO " );
+									list_result_action = new ArrayList<String>();
+									list_result_action.add(Const.SKIP);
+									write_log(list_result_action,list_test_case.get(j));
 								}
 							}// end For
 					}else{
 						System.out.println("[info] Executing: | Running mode test case " + list_test_case.get(j) + " is NO");
+						APP_LOGS.debug("[info] Executing: | Running mode test case " + list_test_case.get(j) + " is NO");
+						//list_result_action.add(Const.SKIP);
 					}
 				}
 			}else{
 				System.out.println("[info] Executing: | Running mode suite " + list_suite.get(i) + " is NO");
+				APP_LOGS.debug("[info] Executing: | Running mode suite " + list_suite.get(i) + " is NO");
+				//list_result_action.add(Const.SKIP);
 			}
 		} // end for
 	}
@@ -167,7 +179,6 @@ public class DriverScript {
 
 					if (keyword_execution_result.contains("FAIL") && CONFIG.getProperty("capture_mode").equals("ON")) {
 						String nameImg = nameTestCase + "_Step_" + i + "_dataTest_" + counterDataSet;						
-						
 						Keywords.captureEntirePageScreenshot("",nameImg);
 					}
 				} else {
@@ -197,6 +208,10 @@ public class DriverScript {
 				if(tmp.get(y).startsWith(Const.FAIL)){
 					currentSuite.setCellData(Const.CASE_STEP_SHEET, colName, i,tmp.get(y));
 					currentSuite.setCellData(nameTestCase, Const.RESULT, (counterDataSet+1), Const.FAIL);
+					break;
+				}else if(tmp.get(y).startsWith(Const.SKIP)){
+					currentSuite.setCellData(Const.CASE_STEP_SHEET, colName, i,tmp.get(y));
+					currentSuite.setCellData(nameTestCase, Const.RESULT, (counterDataSet+1), Const.SKIP);
 					break;
 				}else{
 					currentSuite.setCellData(nameTestCase, Const.RESULT, (counterDataSet+1), Const.PASS);

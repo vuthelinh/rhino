@@ -193,8 +193,8 @@ public class Keywords{
 	}
 	
 	public static String close(String object, String data) {
-		APP_LOGS.debug("[info] Executing: |close |");
-		System.out.println("[info] Executing: |close |");
+		APP_LOGS.debug("[info] Executing: |close |\n");
+		System.out.println("[info] Executing: |close |\n");
 		
 		try {
 			//_driver.close();

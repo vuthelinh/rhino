@@ -154,7 +154,10 @@ public class ReportUtil {
 									}
 								}else{
 									codeHTML.write("<td align=center bgcolor=#969696><FONT COLOR=#000000 FACE= Arial  SIZE=1>");
-								} 
+									if (suite_result.equals("")) {
+										suite_result = Const.SKIP;
+										skipped++;
+								} }
 							}
 							else
 							codeHTML.write("<td align= center bgcolor=#F6CEF5><FONT COLOR=#000000 FACE= Arial  SIZE=1>");
