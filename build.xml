@@ -19,7 +19,7 @@
 	<property name="ws.obj"    			value="${ws.src}/object"/>
 	
 	<!-- Setting.properties -->
-	<property name="selenium.host"      value=""/>
+	<property name="selenium.host"      value="https://admintest.wellbarrier.com"/>
 	<property name="selenium.browser"   value="firefox"/>
 	<property name="selenium.timeout"   value="61"/>
 	<property name="capture.mode"       value="ON"/>
@@ -140,6 +140,18 @@
 			<fileset dir="${ws.home}/test-output"/>
 		</move>
 
+	</target>
+	
+	
+	<!-- update keyword -->
+	<property name="keyword.update" value=""/>
+	<target name="keyword_update">
+		
+		<propertyfile file="Setting.properties" comment="My properties">
+					<entry  key="keyword.update" value="${keyword.update}"/>
+		</propertyfile>
+		
+		<java classname="com.rhino.utility.UpdateVersion" classpath="${ws.bin}" classpathref="testcase.path" />
 	</target>
 
 	<!-- download webdriver -->
