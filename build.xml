@@ -145,7 +145,7 @@
 	
 	<!-- update keyword -->
 	<property name="keyword.update" value=""/>
-	<target name="keyword_update">
+	<target name="keyword_update" depends="compile" >
 		
 		<propertyfile file="Setting.properties" comment="My properties">
 					<entry  key="keyword.update" value="${keyword.update}"/>
