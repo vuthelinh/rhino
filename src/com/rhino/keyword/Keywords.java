@@ -20,6 +20,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -197,7 +198,6 @@ public class Keywords{
 		System.out.println("[info] Executing: |close |\n");
 		
 		try {
-			//_driver.close();
 			_driver.quit();
 			System.gc();	
 			return Const.PASS;
@@ -230,12 +230,40 @@ public class Keywords{
 			return Const.FAIL+ ": Element " + OBJECT.getProperty(object) + " not found !";}
 	}
 	
+	public static String waitForVisible(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |waitForVisible | " + OBJECT.getProperty(object) + " |");
+		System.out.println("[info] Executing: |waitForVisible | " + OBJECT.getProperty(object) + " |");
+		try {
+			WebDriverWait wait = new WebDriverWait(_driver, Long.valueOf(CONFIG.getProperty("selenium.timeout")));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(formats(OBJECT.getProperty(object))));
+			return Const.PASS;
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Timed out after " + CONFIG.getProperty("selenium.timeout") + " \n" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Timed out after " + CONFIG.getProperty("selenium.timeout") + " \n" + e.getMessage());
+			return Const.FAIL;
+		}
+	}
+	
+	public static String waitForNotVisible(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |waitForNotVisible | " + OBJECT.getProperty(object) + " |");
+		System.out.println("[info] Executing: |waitForNotVisible | " + OBJECT.getProperty(object) + " |");
+		try {
+			WebDriverWait wait = new WebDriverWait(_driver, Long.valueOf(CONFIG.getProperty("selenium.timeout")));
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(formats(OBJECT.getProperty(object))));
+			return Const.PASS;
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Timed out after " + CONFIG.getProperty("selenium.timeout") + " \n" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Timed out after " + CONFIG.getProperty("selenium.timeout") + " \n" + e.getMessage());
+			return Const.FAIL;
+		}
+	}
+	
 	public static String waitForElementPresent(String object, String data) {
 		APP_LOGS.debug("[info] Executing: |waitForElementPresent | " + OBJECT.getProperty(object) + " |");
 		System.out.println("[info] Executing: |waitForElementPresent | " + OBJECT.getProperty(object) + " |");
 		try {
 			WebDriverWait wait = new WebDriverWait(_driver, Long.valueOf(CONFIG.getProperty("selenium.timeout")));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(formats(OBJECT.getProperty(object))));
+			wait.until(ExpectedConditions.presenceOfElementLocated(formats(OBJECT.getProperty(object))));
 			return Const.PASS;
 		} catch (WebDriverException e) {
 			APP_LOGS.debug("[>>>> ERROR <<<] Timed out after " + CONFIG.getProperty("selenium.timeout") + " \n" + e.getMessage());
@@ -275,7 +303,7 @@ public class Keywords{
 		System.out.println("[info] Executing: |Launch " + browserType + " browser|");
 		
 		WebDriver driver = null;
-		
+	
 		try {
 
 			switch (browserType) {
@@ -400,5 +428,254 @@ public class Keywords{
 			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
 			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
 			}
+	}
+	
+	public static String clickAt(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |clickAt | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |clickAt | " + OBJECT.getProperty(object) + " | ");
+		/*
+		 * data - specifies the x,y position (i.e. - 10,20) of the mouse event relative to the element returned by the locator.
+		 * */
+		String Data[] = data.split(",");
+		int x =   Integer.parseInt(Data[0]);
+		int y =   Integer.parseInt(Data[1]);
+
+		try {
+				WebElement elements = getElementBy(object);
+				Actions builder = new Actions(_driver);
+				builder.moveByOffset(elements.getLocation().getX() + x, elements.getLocation().getY() + y).click();
+				builder.perform();
+				return Const.PASS;
+				
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+			}
+	}
+	
+	public static String mouseDownAt(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |mouseDownAt | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |mouseDownAt | " + OBJECT.getProperty(object) + " | ");
+		/*
+		 * Simulates a user pressing the left mouse button (without releasing it yet) at the specified location.
+		 * */
+		String Data[] = data.split(",");
+		int x =   Integer.parseInt(Data[0]);
+		int y =   Integer.parseInt(Data[1]);
+
+		try {
+				WebElement elements = getElementBy(object);
+				Actions action = new Actions(_driver);
+				action.moveByOffset(elements.getLocation().getX() + x, elements.getLocation().getY() + y).clickAndHold();
+				action.perform();
+				return Const.PASS;
+				
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+			}
+	}
+	
+	public static String mouseDown(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |mouseDown | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |mouseDown | " + OBJECT.getProperty(object) + " | ");
+		/*
+		 * Simulates a user pressing the left mouse button (without releasing it yet) at the specified location.
+		 * */
+		
+		try {
+				WebElement elements = getElementBy(object);
+				Actions action = new Actions(_driver);
+				action.clickAndHold(elements);
+				action.perform();
+				return Const.PASS;
+				
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+			}
+	}
+	
+	public static String mouseMove(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |mouseDown | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |mouseDown | " + OBJECT.getProperty(object) + " | ");
+		/*
+		 * Simulates a user pressing the left mouse button (without releasing it yet) at the specified location.
+		 * */
+		
+		try {
+				WebElement elements = getElementBy(object);
+				Actions action = new Actions(_driver);
+				action.release(elements);
+				action.perform();
+				return Const.PASS;
+				
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+			}
+	}
+	
+	
+	public static String mouseMoveAt(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |mouseDown | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |mouseDown | " + OBJECT.getProperty(object) + " | ");
+		/*
+		 * Simulates a user pressing the left mouse button (without releasing it yet) at the specified location.
+		 * */
+		
+		String Data[] = data.split(",");
+		int x =   Integer.parseInt(Data[0]);
+		int y =   Integer.parseInt(Data[1]);
+		
+		try {
+				WebElement elements = getElementBy(object);
+				Actions action = new Actions(_driver);
+				action.moveByOffset(elements.getLocation().getX() + x, elements.getLocation().getY() + y).release();
+				action.perform();
+				return Const.PASS;
+				
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+			}
+	}
+	
+	public static String doubleClick(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |doubleClick | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |doubleClick | " + OBJECT.getProperty(object) + " | ");
+		
+		try {
+				WebElement elements = getElementBy(object);
+				Actions action = new Actions(_driver);	
+				action.doubleClick(elements).perform();
+				return Const.PASS;
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+			}
+	}
+	
+	
+	public static String contextMenu(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |contextMenu | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |contextMenu | " + OBJECT.getProperty(object) + " | ");
+
+		try {
+				WebElement elements = getElementBy(object);
+				Actions action = new Actions(_driver);	
+				action.contextClick(elements).perform(); //Right Click
+				return Const.PASS;
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+			}
+	}
+	
+	public static String mouseOver(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |mouseOver | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |mouseOver | " + OBJECT.getProperty(object) + " | ");
+		
+		try {
+				WebElement elements = getElementBy(object);
+				Actions action = new Actions(_driver);
+				action.moveToElement(elements).perform();
+				return Const.PASS;
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+			}
+	}
+	
+	
+	public static String dragAndDrop(String object, String data) {
+	   /**
+		 * Offset in pixels from the current location to which the element should be moved, e.g., "+70,-300"
+		 * */
+		APP_LOGS.debug("[info] Executing: |dragAndDrop | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |dragAndDrop | " + OBJECT.getProperty(object) + " | ");
+		
+		String Data[] = data.split(",");
+		
+		int x =   Integer.parseInt(Data[0]);
+		int y =   Integer.parseInt(Data[1]);
+
+		try {
+				WebElement elements = getElementBy(object);
+				Actions action = new Actions(_driver);
+				action.clickAndHold(elements).moveByOffset(x, y).release().perform();
+				return Const.PASS;
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+			}
+	}
+	
+	public static String navigate(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |navigate | " + OBJECT.getProperty(data) + " | ");
+		System.out.println("[info] Executing: |navigate | " + OBJECT.getProperty(data) + " | ");
+		
+		try {
+				_driver.navigate().to(OBJECT.getProperty(data));			
+			return Const.PASS;
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Page " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Page " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Page " + OBJECT.getProperty(object) + " not found !";
+			}
+	}
+	
+	
+	public static String check(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |check | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |check | " + OBJECT.getProperty(object) + " | ");
+
+		try {
+			WebElement elements = getElementBy(object);
+			String getChecked = elements.getAttribute("checked");
+
+			if (getChecked == null) {
+				elements.click();
+			}
+			
+			return Const.PASS;
+			
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+		}
+	}
+	
+	
+	
+	public static String uncheck(String object, String data) {
+		APP_LOGS.debug("[info] Executing: |check | " + OBJECT.getProperty(object) + " | ");
+		System.out.println("[info] Executing: |check | " + OBJECT.getProperty(object) + " | ");
+
+		try {
+			WebElement elements = getElementBy(object);
+			String getChecked = elements.getAttribute("checked");
+
+			if (getChecked != null) {
+				elements.click();
+			}
+			
+			return Const.PASS;
+			
+		} catch (WebDriverException e) {
+			APP_LOGS.debug("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			System.out.println("[>>>> ERROR <<<] Element " + OBJECT.getProperty(object) + " not found !" + e.getMessage());
+			return Const.FAIL + ": Element " + OBJECT.getProperty(object) + " not found !";
+		}
 	}
 }
