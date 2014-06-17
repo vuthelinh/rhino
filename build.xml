@@ -27,7 +27,6 @@
 	<property name="selenium.report"    value=""/>
 	<property name="web.driver.ie"      value="${user.repository}/IEDriverServer.exe"/>
 	<property name="web.driver.chrome"  value="${user.repository}/chromedriver.exe"/>
-
 	
 
 	<path id="testcase.path">
@@ -112,7 +111,7 @@
 	</target>
 
 	<!-- execute test -->
-	<target name="install" depends="compile"  >
+	<target name="run" depends="compile,update_lib"  >
 
 		<propertyfile file="log\log4j.properties">
 			<entry  key="log4j.appender.dest1.File" value="${selenium.report}\log4j.log"/>
@@ -128,12 +127,11 @@
 			<entry  key="webdriver_chrome" 		value="${web.driver.chrome}"/>
 		</propertyfile>
 
-
 		<java classname="com.rhino.testRunner.DriverScript" classpath="${ws.bin}" classpathref="testcase.path"/>
 	</target>
 
 	<!-- create report -->
-	<target name="report">
+	<target name="install" depends="run" >
 		<java classname="com.rhino.utility.ReportUtil" classpath="${ws.bin}" classpathref="testcase.path" />
 
 		<move todir="${selenium.report}/test-output">
@@ -141,7 +139,6 @@
 		</move>
 
 	</target>
-	
 	
 	<!-- update keyword -->
 	<property name="keyword.update" value=""/>
@@ -163,29 +160,10 @@
 		</get>
 		<unzip src="${user.repository}/IEDriverServer_Win32_2.41.0.zip" dest="${user.repository}"/>
 		<unzip src="${user.repository}/chromedriver_win32.zip" dest="${user.repository}"/>
-		<!-- delete all of zip file
-		<delete>
-			<fileset dir="${ws.driver}">
-	    		<include name="**.zip"/>
-	    		<exclude name="**.exe"/
-			</fileset>
-		</delete>
-	-->
 	</target>
 
-	<!-- zip file 
-	<target name="zip">
-		<zip destfile="${ws.driver}/driver.zip" basedir="${ws.driver}"/>
-	</target> -->
-
-	<!-- the same with task: download webdriver  
-	<target name="execute_bash">
-		<exec dir="${ws.home}" executable="config.bat">
-		</exec>
-	</target> -->
-
 	<!-- update library -->
-	<target name="update_lib">
+	<target name="update_lib" depends="download_webdriver">
 		<mkdir dir="${user.repository}"/>
 		<get dest="${user.repository}" skipexisting="true" verbose="on">
 			<!-- selenium-java-2.41.0 -->
@@ -234,6 +212,7 @@
 			<url url="http://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-chrome-driver/2.42.0/selenium-chrome-driver-2.42.0.jar"/>
 			<url url="http://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-htmlunit-driver/2.42.0/selenium-htmlunit-driver-2.42.0.jar"/>
 			<url url="http://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-remote-driver/2.42.0/selenium-remote-driver-2.42.0.jar"/>
+			<url url="http://repo1.maven.org/maven2/org/seleniumhq/selenium/selenium-safari-driver/2.42.0/selenium-safari-driver-2.42.0.jar"/>
 			<!-- poi -->
 			<url url="http://repo1.maven.org/maven2/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
 
@@ -268,11 +247,6 @@
 			<url url="http://repo1.maven.org/maven2/org/yaml/snakeyaml/1.13/snakeyaml-1.13.jar"/>
 			<url url="http://repo1.maven.org/maven2/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
 
-			<!-- testlink 
-			  		<url url="http://repo1.maven.org/maven2/org/apache/ws/commons/util/ws-commons-util/1.0.2/ws-commons-util-1.0.2.jar"/>
-			  		<url url="http://repo1.maven.org/maven2/org/apache/xmlrpc/xmlrpc-client/3.1.3/xmlrpc-client-3.1.3.jar"/>
-			  		<url url="http://repo1.maven.org/maven2/org/apache/xmlrpc/xmlrpc-common/3.1.3/xmlrpc-common-3.1.3.jar"/>
-			  		-->
 		</get>
 	</target>
 </project>
