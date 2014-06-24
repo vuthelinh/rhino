@@ -1,0 +1,4 @@
+frontpage.user=id=email
+frontpage.pwd=id=password
+frontpage.loginBtn=css=a.submit-button > span
+frontpage.logoutBtn=link=Logout

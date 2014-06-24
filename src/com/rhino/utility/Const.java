@@ -18,11 +18,11 @@ public final class Const {
 	
 	public static final String BIN_LIST_FILE 		=  BIN_SCENARIO_PATH + "ListFile.xlsx";
 	
-	public static final String SUITE_LIST_SHEET 		= "List Suite";
+	public static final String SUITE_LIST_SHEET 	= "List Suite";
 	public static final String DATA_PREFIX 			= "Prefix";
 	public static final String SUITE_NAME_COL 		= "Test Suite";
 	public static final String SUITE_DES_COL  		= "Description";
-	public static final String SUITE_COMMENT_COL 		= "Comment";
+	public static final String SUITE_COMMENT_COL 	= "Comment";
 	
 	// Test Steps
 	public static final String DATA 			= "Data";
@@ -31,7 +31,7 @@ public final class Const {
 	public static final String KEYWORD 			= "Keyword";
 	
 	// Configuration
-	public static final String CONFIG_SYS 			= "\\setting.properties";
+	public static final String CONFIG_SYS 		= "\\setting.properties";
 	public static final String CONFIG 			= "config";
 	
 	// Object Repository

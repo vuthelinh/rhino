@@ -1,0 +1,53 @@
+wbs.file=//span[text()='File']
+wbs.file.newWell=link=New Well
+wbs.file.save=link=Save
+wbs.file.saveAs=link=Save as
+wbs.file.export.WBSform=link=Open/print wbs form
+wbs.file.export.illustration=link=Open/print illustration only
+wbs.file.export.WBSasImage=link=Open/print wbs form as image
+wbs.file.export.WBEAC.=link=Open/print wbs form with WBEAC
+wbs.file.export.word=link=Open/print risk form in Word
+wbs.file.export.excel=link=Open/print risk form in Excel
+wbs.file.exportPS=link=Open/print Well barrier pressure plot
+
+wbs.edit=//span[text()='Edit']
+wbs.edit.illustration=link=Edit barrier illustration
+wbs.edit.WCA=link=Create WCA flow diagram
+
+wbs.help=//span[text()='Help']
+wbs.help.user.manual=link=User manual
+
+wbs.dropdown.listType=id=imgDropdown
+wbs.pressurePlot.option=/src/iObject/wbs_wellwithPS.png
+wbs.test=id=comboboxType
+
+
+wbs.field=id=field
+wbs.wellDesign=id=wellDesign
+wbs.well=id=well
+wbs.reservoir=id=reservoir
+
+wbs.image.ps=id=imgPressurePlot
+
+wbs.note=id=note
+
+wbs.title=css=span.icon-edit-small
+wbs.sub.title=//form[@id='aspnetForm']/div[2]/table[2]/tbody/tr[2]/td[2]/table/tbody/tr/td/a[2]/span
+
+wbs.popup.field=id=txtTitle
+wbs.popup.ok=css=#cellCommandTitle > input[type="button"]
+wbs.popup.cancel=//td[@id='cellCommandTitle']/input[2]
+
+
+wbs.saving.form.groupRef=id=schematic
+wbs.saving.form.drawingNo=id=drawingNumber
+wbs.saving.form.revision=id=revision
+wbs.saving.form.verifyBy=id=cmbVerify
+wbs.saving.form.AuthorComment=id=comment
+wbs.saving.form.region=id=cmbRegion
+
+wbs.saving.form.saveBtn=id=linkSave
+wbs.saving.form.sendBtn=id=linkSaveAndSend
+wbs.saving.form.cancelBtn=id=linkClose
+
+wbs.ok.popup=id=popup_ok

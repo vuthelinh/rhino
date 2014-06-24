@@ -1,0 +1,33 @@
+company.name=//input[@id='name']
+company.prefix=//input[@id='prefix']
+company.limitCountry=//select[@id='LimitCountries']
+company.totalUsers=//td[contains(text(),'Total Users')]/following-sibling::td
+company.userDefault=//input[@id='cbDefaultUser']
+company.access.pressPlot=//input[@id='cbAllowAccessPressurePlot']
+company.access.sequenceDiagram=//input[@id='cbAllowAccessSequence']
+company.contactEmail=//input[@id='email']
+company.visitAddress=//input[@id='address']
+company.invoiceAddress=//input[@id='invoiceaddress']
+company.contactPerson=//input[@id='contactperson']
+company.contractType=//input[@id='contracttype']
+company.startDate=//input[@id='contractstartdate']
+company.endDate=//input[@id='contractenddate']
+company.phone=//input[@id='phone']
+company.website=//input[@id='website']
+company.description=//textarea[@id='description']
+company.logo=//input[@id='fileUpload']
+company.resizeOption=//select[@id='resizeOption']
+company.uploadBtn=//input[@id='btnUpload']
+
+company.countries=//select[@id='cmbCountries']
+company.addCountry=//a[contains(@href, 'javascript:AddCountry();')]
+company.removeCountry=//a[contains(@href, 'javascript:RemoveCountry();')]
+company.chosenCountries=//select[@id='cmbChosenCountries']
+
+company.domainName=//input[@id='txtDomain']
+company.addDomanin=//a[contains(@href, 'javascript:AddDomain();')]
+company.cancelDomain=//a[contains(@href, 'javascript:CancelDomain();')]
+company.removeDomain=//a[contains(@href, 'javascript:RemoveDomain();')]
+
+company.TullowOil=//a[contains(text(),'Tullow Oil')]
+

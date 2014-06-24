@@ -1,0 +1,9 @@
+admin.page.new.button=//a[@id='lkAdd']/span
+admin.page.save.button=//a[@id='lkSave']
+admin.page.logout=//a[@onclick='Logout();']
+admin.error_msg=css=label.error
+
+notifyMsg.saveSuccessful=id=lbMessage
+browser.scroller=/src/iObject/scroller.png
+browser.accept.download=/src/iObject/OK_download.png
+browser.comfirm.saveFile=/src/iObject/saveFile.png

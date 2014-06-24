@@ -1,0 +1,5 @@
+horizontal.position.des=/src/AT_01325/step1.png
+vertical.position.des=/src/AT_01325/step2.png
+at01325.expectResult=/src/AT_01325/result.png
+at01318.ps1=/src/AT_01318/result.png
+at01318.ps2=/src/AT_01318/pressureplot2.png

@@ -1,0 +1,4 @@
+user.searchBox=//input[@id='txtSearch']
+user.searchBtn=css=a.link_button.icon-search
+user.firstUser=//tbody[@id='user-list-content']/tr/td/a
+user.access.pressurePlot=//input[@id='cbAccessPressurePlot']									  

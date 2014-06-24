@@ -1,0 +1,31 @@
+pressure.plot.backBtn=css=span.icon-back
+pressure.plot.cancelBtn=link=Cancel
+pressure.plot.help=css=span.icon-help
+pressure.plot.saveBtn=css=span.icon-save
+pressure.plot.editColorBtn=css=span.icon-edit
+pressure.plot.editPSheight=link=Edit pressure plot height
+pressure.plot.seriesHeight=id=txtSeriesHeight
+pressure.plot.scaledRaito=id=txtScaledRatio
+pressure.plot.editPS.OK=//a[@onclick='PressurePlot.UpdatePressurePlotHeight();']
+pressure.plot.editPS.KO=//a[@onclick="$('#pressurePlotHeightEditorDialog').bPopup().close()"]
+pressure.plot.showHide=id=ckLithology
+pressure.plot.uploadCompleted=css=span.message.green
+
+pressure.plot.upload=id=fileupload
+pressure.plot.refresh=//span[@id='refreshChart']/span
+pressure.plot.download.template=link=Download Excel Template
+
+pressure.grid.Depth=css=th.head-c1
+
+pressure.grid.column.depth=css=td.cell-1
+pressure.grid.column.PP.min=css=td.cell-2
+pressure.grid.column.PP.exp=css=td.cell-3
+pressure.grid.column.PP.max=css=td.cell-4
+pressure.grid.column.FP.min=css=td.cell-5
+pressure.grid.column.FP.exp=css=td.cell-6
+pressure.grid.column.FP.max=css=td.cell-7
+
+
+pressure.grid.input=css=input.ed-edt-input
+
+prressure.plot.density=//div[@id='plot_content_container']/ul/li[2]

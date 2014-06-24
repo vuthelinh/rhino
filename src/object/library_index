@@ -1,0 +1,5 @@
+libraryIndex.template=//div[@id='leftmenu']//a[text()='Template Library']
+libraryIndex.my.library=//div[@id='leftmenu']//a[text()='My Library']
+libraryIndex.newWell=link=New Well
+libraryIndex.NoPressurePlot.option=//a[contains(@href, '/Editor/Illustration')]
+libraryIndex.PressurePlot.option=//a[contains(@href, '/PressurePlot')]
